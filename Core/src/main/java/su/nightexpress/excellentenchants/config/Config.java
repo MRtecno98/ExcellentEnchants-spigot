@@ -29,6 +29,7 @@ public class Config {
     public static boolean ENCHANTMENTS_ITEM_CROSSBOWS_AS_BOWS;
     public static boolean ENCHANTMENTS_ITEM_ELYTRA_AS_CHESTPLATE;
     public static boolean ENCHANTMENTS_ENTITY_PASSIVE_FOR_MOBS;
+    public static boolean ENCHANTMENTS_AUTO_CONFLICT;
 
     private static Map<ObtainType, ObtainSettings> OBTAIN_SETTINGS;
     private static Map<String, EnchantTier>        TIERS;
@@ -50,6 +51,8 @@ public class Config {
             ENCHANTMENTS_DISABLED_IN_WORLDS.put(worldName, cfg.getStringSet(path + "Disabled_In_Worlds." + worldName)
                 .stream().map(String::toLowerCase).collect(Collectors.toSet()));
         }
+        
+        ENCHANTMENTS_AUTO_CONFLICT = cfg.getBoolean(path + "Auto-Conflicts");
 
         ENCHANTMENTS_DESCRIPTION_ENABLED = cfg.getBoolean(path + "Description.Enabled");
         ENCHANTMENTS_DESCRIPTION_FORMAT = StringUtil.color(cfg.getString(path + "Description.Format", ""));

@@ -41,6 +41,7 @@ General:
       other_world:
         - 'enchant_name'
         - 'another_enchant'
+    Auto-Conflicts: true
     # Item settings.
     Item:
       # How many of custom enchantments the item can contain at the same time?
