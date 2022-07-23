@@ -42,6 +42,8 @@ General:
         - 'enchant_name'
         - 'another_enchant'
     Auto-Conflicts: true
+    Disabled-Conflicts:
+       - su.nightexpress.excellentenchants.api.enchantment.type.BowEnchant
     # Item settings.
     Item:
       # How many of custom enchantments the item can contain at the same time?
