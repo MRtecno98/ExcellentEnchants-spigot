@@ -18,3 +18,5 @@
 **/.settings/
 **/.classpath
 **/.project
+**/.gitignore
+!.gitignore
