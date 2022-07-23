@@ -227,7 +227,9 @@ public abstract class ExcellentEnchant extends Enchantment implements IListener 
 
     @Override
     public void registerListeners() {
-    	if(Config.ENCHANTMENTS_AUTO_CONFLICT)
+    	if(Config.ENCHANTMENTS_AUTO_CONFLICT
+    			&& Config.ENCHANTMENTS_DISABLED_CONFLICTS.stream()
+    								.noneMatch((c) -> c.isInstance(this)))
     		this.addConflicts();
         this.plugin.getPluginManager().registerEvents(this, plugin);
     }

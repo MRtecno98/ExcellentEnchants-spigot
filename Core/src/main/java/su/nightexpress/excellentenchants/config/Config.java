@@ -1,7 +1,20 @@
 package su.nightexpress.excellentenchants.config;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+
+import com.google.common.base.Predicates;
+
 import su.nexmedia.engine.api.config.JYML;
 import su.nexmedia.engine.utils.Placeholders;
 import su.nexmedia.engine.utils.StringUtil;
@@ -10,9 +23,6 @@ import su.nightexpress.excellentenchants.ExcellentEnchants;
 import su.nightexpress.excellentenchants.api.enchantment.ExcellentEnchant;
 import su.nightexpress.excellentenchants.manager.object.EnchantTier;
 import su.nightexpress.excellentenchants.manager.type.ObtainType;
-
-import java.util.*;
-import java.util.stream.Collectors;
 
 public class Config {
 
@@ -30,6 +40,8 @@ public class Config {
     public static boolean ENCHANTMENTS_ITEM_ELYTRA_AS_CHESTPLATE;
     public static boolean ENCHANTMENTS_ENTITY_PASSIVE_FOR_MOBS;
     public static boolean ENCHANTMENTS_AUTO_CONFLICT;
+    
+    public static Set<Class<?>> ENCHANTMENTS_DISABLED_CONFLICTS;
 
     private static Map<ObtainType, ObtainSettings> OBTAIN_SETTINGS;
     private static Map<String, EnchantTier>        TIERS;
@@ -53,6 +65,14 @@ public class Config {
         }
         
         ENCHANTMENTS_AUTO_CONFLICT = cfg.getBoolean(path + "Auto-Conflicts");
+        
+        ENCHANTMENTS_DISABLED_CONFLICTS = cfg.getStringSet(path + "Disabled-Conflicts").stream().map(t -> {
+			try {
+				return Class.forName(t);
+			} catch (ClassNotFoundException e) {
+				return null;
+			}
+		}).filter(Predicates.notNull()).collect(Collectors.toSet());
 
         ENCHANTMENTS_DESCRIPTION_ENABLED = cfg.getBoolean(path + "Description.Enabled");
         ENCHANTMENTS_DESCRIPTION_FORMAT = StringUtil.color(cfg.getString(path + "Description.Format", ""));
