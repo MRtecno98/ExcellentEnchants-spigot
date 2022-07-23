@@ -13,3 +13,8 @@
 /target/
 /V1_18_R2/pom.xml.versionsBackup
 /V1_18_R2/target/
+
+**/target/
+**/.settings/
+**/.classpath
+**/.project
